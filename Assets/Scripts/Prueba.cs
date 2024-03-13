@@ -14,9 +14,13 @@ public class Prueba : MonoBehaviour
 
     [SerializeField] bool isTouching = false;
     [SerializeField] float timer = 0;
+
+    [SerializeField] Transform spawnObjects;
+    [SerializeField] bool tap = false;
+
     void Update()
     {
-        if (Input.touchCount > 0)
+        if (Input.touchCount > 0  && instanciaObjeto.GetComponent<SpriteRenderer>().sprite != null && instanciaObjeto.GetComponent<SpriteRenderer>().color.a !=0)
         {
             isTouching = true;
         }
@@ -31,11 +35,19 @@ public class Prueba : MonoBehaviour
             if(timer > 1f)
             {
                 VerifyRay();
+            }else if (timer > 0.3f && timer < 0.5f)
+            {
+
+            }else if (timer < 0.3f && tap == false)
+            {
+                tap = true;
+                Instantiate(instanciaObjeto,PositionTouch(),Quaternion.identity,spawnObjects);
             }
         }
         else
         {
             timer = 0;
+            tap = false;
         }
         /*
          * 
@@ -57,10 +69,7 @@ public class Prueba : MonoBehaviour
         primerTouch = Input.GetTouch(0);
         touchPosition = Camera.main.ScreenToWorldPoint(primerTouch.position);
 
-        //Debug.DrawRay(touchPosition, Vector2.up , UnityEngine.Color.green, 1f);
         RaycastHit2D hit = Physics2D.Raycast(touchPosition, Vector2.zero);
-        //puedes mover
-
         if (hit.collider != null )
         {
             //GameObject objetoGolpeado = hit.collider.gameObject;
@@ -69,10 +78,13 @@ public class Prueba : MonoBehaviour
         }
 
     }
-    void PositionTouch()
+    
+    Vector3 PositionTouch()
     {
         primerTouch = Input.GetTouch(0);
         touchPosition = primerTouch.position;
         positionSpanw = Camera.main.ScreenToWorldPoint(touchPosition);
+        Vector3 returmPosition = new Vector3(positionSpanw.x, positionSpanw.y,0);
+        return returmPosition;
     }
 }
