@@ -18,18 +18,25 @@ public class Prueba : MonoBehaviour
     [SerializeField] Transform spawnObjects;
     [SerializeField] bool tap = false;
 
+    //Pruebas
+    [SerializeField] float timeScale=0;
+    [SerializeField] float quantityTap;
     void Update()
     {
         if (Input.touchCount > 0  && instanciaObjeto.GetComponent<SpriteRenderer>().sprite != null && instanciaObjeto.GetComponent<SpriteRenderer>().color.a !=0)
         {
             isTouching = true;
+            if (timeScale == 0)
+            {
+                timeScale = timeScale + Time.deltaTime;
+            }
         }
         else
         {
             isTouching = false;
         }
         
-        if (isTouching)
+        /*if (isTouching)
         {
             timer = timer + Time.deltaTime;
             if(timer > 1f)
@@ -48,13 +55,9 @@ public class Prueba : MonoBehaviour
         {
             timer = 0;
             tap = false;
-        }
-        /*
-         * 
-         * 
-            
-            Instantiate(instanciaObjeto,new Vector3(positionSpanw.x,positionSpanw.y,0),Quaternion.identity);
-         */
+        }*/
+
+
     }
     public void CambioColor(GameObject color)
     {
@@ -72,7 +75,6 @@ public class Prueba : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(touchPosition, Vector2.zero);
         if (hit.collider != null )
         {
-            //GameObject objetoGolpeado = hit.collider.gameObject;
             Transform otherTransfomr = hit.collider.gameObject.transform;
             otherTransfomr.position = new Vector3(touchPosition.x, touchPosition.y,0);
         }
