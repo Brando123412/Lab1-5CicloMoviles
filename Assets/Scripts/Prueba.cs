@@ -57,7 +57,7 @@ public class Prueba : MonoBehaviour
             tap = false;
         }*/
 
-
+              
     }
     public void CambioColor(GameObject color)
     {
@@ -78,9 +78,7 @@ public class Prueba : MonoBehaviour
             Transform otherTransfomr = hit.collider.gameObject.transform;
             otherTransfomr.position = new Vector3(touchPosition.x, touchPosition.y,0);
         }
-
     }
-    
     Vector3 PositionTouch()
     {
         primerTouch = Input.GetTouch(0);
