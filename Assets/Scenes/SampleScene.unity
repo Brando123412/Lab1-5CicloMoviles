@@ -1636,7 +1636,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2088220173
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1652,8 +1652,9 @@ MonoBehaviour:
   cantidadTouch: 0
   time: 0
   timeTouch: 0
-  timeVerify: 0
   objeto: {fileID: 1678270018669678964, guid: 8aa161a12d6b5b0409db2a1df349ce97, type: 3}
+  touchPosition: {x: 0, y: 0, z: 0}
+  positionSpanw: {x: 0, y: 0}
 --- !u!4 &2088220174
 Transform:
   m_ObjectHideFlags: 0

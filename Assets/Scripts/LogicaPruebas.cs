@@ -9,6 +9,13 @@ public class LogicaPruebas : MonoBehaviour
     [SerializeField] float time;
     [SerializeField] float timeTouch;
     [SerializeField] GameObject objeto;
+
+    //Position Spanw    and touch
+    [SerializeField] Vector3 touchPosition;
+    [SerializeField] Vector2 positionSpanw;
+
+    [SerializeField] Touch touch;
+
     private void Awake()
     {
         isTouch = false;
@@ -22,7 +29,7 @@ public class LogicaPruebas : MonoBehaviour
         if (Input.touchCount > 0)
         {
             // Obtener el primer toque
-            Touch touch = Input.GetTouch(0);
+            touch = Input.GetTouch(0);
 
             if (touch.phase != TouchPhase.Moved)
             {
@@ -47,26 +54,56 @@ public class LogicaPruebas : MonoBehaviour
             }
         }
 
+        touchPosition = touch.position;
+        positionSpanw = Camera.main.ScreenToWorldPoint(touchPosition);
+        RaycastHit2D hit = Physics2D.Raycast(positionSpanw, Vector2.zero);
+        if (hit.collider != null)
+        {
+            Debug.Log("Hola");
+            Destroy(hit.collider.gameObject);
+        }          else
+        {
+            Debug.Log("No colision");
+        }
 
 
         time += Time.deltaTime;
-        if (time - timeTouch >= 0.35f)
+        if (time - timeTouch >= 0.3f)
         {
             Debug.Log("tiempo");
             if (cantidadTouch >= 2 && timeTouch != 0)
             {
-                print("Doble tap");
                 
+                
+                /*print("Doble tap");
+                DeleteObject();*/
                 cantidadTouch = 0;
                 timeTouch = 0;
             }
             else if(cantidadTouch < 2 && timeTouch != 0)
             {
                 print("tap");
-                Instantiate(objeto);
+                Instantiate(objeto, new Vector3(positionSpanw.x, positionSpanw.y, 0), Quaternion.identity);
                 cantidadTouch = 0;
                 timeTouch = 0;
             }
         }
+
+        
     }
+    /*Vector3 PositionTouch()
+    {
+        
+        Vector3 returmPosition = new Vector3(positionSpanw.x, positionSpanw.y, 0);
+        return returmPosition;
+    }
+    void DeleteObject()
+    {
+        /*RaycastHit2D hit = Physics2D.Raycast(positionSpanw, Vector2.zero);
+        if (hit.collider != null)
+        {
+            print("Hola");
+            Destroy(hit.collider.gameObject);
+        }    
+    }          */
 }

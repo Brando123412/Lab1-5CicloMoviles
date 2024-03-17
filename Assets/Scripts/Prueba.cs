@@ -36,7 +36,7 @@ public class Prueba : MonoBehaviour
             isTouching = false;
         }
         
-        /*if (isTouching)
+        if (isTouching)
         {
             timer = timer + Time.deltaTime;
             if(timer > 1f)
@@ -55,7 +55,7 @@ public class Prueba : MonoBehaviour
         {
             timer = 0;
             tap = false;
-        }*/
+        }
 
               
     }
@@ -71,7 +71,7 @@ public class Prueba : MonoBehaviour
     {
         primerTouch = Input.GetTouch(0);
         touchPosition = Camera.main.ScreenToWorldPoint(primerTouch.position);
-
+        print("Hola");         
         RaycastHit2D hit = Physics2D.Raycast(touchPosition, Vector2.zero);
         if (hit.collider != null )
         {
